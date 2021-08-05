@@ -9,7 +9,7 @@ for subj = 1 : nsubj
     save_dir = [bids_dir,'derivatives/',subj_str,'/'];   
 
     % load data
-    filename = ['meg/timeseries/',subj_str,'_stage-07_run-',sprintf('%02.0f',epoch),'_freq-split.mat'];
+    filename = ['meg/timeseries/',subj_str,'_stage-07_run-',sprintf('%02.0f',epoch),'_source-split.mat'];
     load([save_dir,filename],'freq');
     
     % extract PAC data
@@ -73,11 +73,10 @@ cfg.uvar                = 1;
 cfg.parameter           = 'powspctrm';
 cfg.design              = design;
 cfg.statistic           = 'ft_statfun_depsamplesT';  
-cfg.tail                = 1;
+cfg.tail                = 0;
+cfg.correcttail        = 'prob';
 stat                    = ft_freqstatistics(cfg,freq,null_hyp);
-
-% grab hipp t
-hipp_t = stat.stat;
+hipp_t = stat;
 
 %% Repeat for Perms
 % reshape source data

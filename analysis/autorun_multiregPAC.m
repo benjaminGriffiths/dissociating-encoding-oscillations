@@ -30,10 +30,10 @@ for subj = 1: nsubj
     for epoch = 1:3
         
         % calculate PAC
-        freq = dmm_getPAC(bids_dir,subj,epoch,peak_freq(subj,:),idx);
+        freq = dmm_getPAC(bids_dir,subj,epoch,peak_freq(subj,:));
 
         % run regression
-        dmm_runPacRegression(bids_dir,subj,epoch) 
+        dmm_runPacRegression(bids_dir,subj,epoch,freq) 
     end
 end
 
